@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind</title>
+    <script src="vue1028.js"></script>
+    <style>
+        .yellowgreen{
+            color: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2>Hello,vue</h2>
+        <input type="text" :title="titleVal">
+        <!-- v-bind 的特殊使用方式 -->
+        <a v-bind="{demo: 'demo/'+ id}">我是a标签</a>
+        <span :class="myColor">字体颜色测试</span>
+    </div>
+</body>
+<script>
+    // v-bind 去绑定一些属性, 绑定class和style这两个属性比较多
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            msg: "我的vue",
+            titleVal: "我的vue",
+            id: "001",
+            myColor: "yellowgreen"
+        }
+    })
+</script>
+</html>

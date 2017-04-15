@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cloak</title>
+    <script src="vue1028.js"></script>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <span v-cloak>{{msg}}</span>
+    </div>
+</body>
+<script>
+    // v-cloak 主要是用来放置闪烁的
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            msg: "我是数据"
+        }
+    })
+</script>
+</html>
