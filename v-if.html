@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>if</title>
+    <script src="vue1028.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-if="user.age < 18">{{user.name}}-{{user.age}}</div>
+    </div>
+</body>
+<script>
+    // v-if 和 v-show 的区别 v-if 不渲染 v-show 渲染了 但是属性的display: none
+    // 性能: 
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            user: {name: "张三", age: 20}
+        }
+    })
+</script>
+</html>
