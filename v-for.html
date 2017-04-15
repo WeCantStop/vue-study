@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-for遍历</title>
+    <script src="vue1028.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in list" track-by="$index">{{item}}</li>
+        </ul>
+        <button @click="addNum">add</button>
+
+        <table>
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+            </tr>
+            <tr v-for="(key,item) in list2">
+                <td>{{key+1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.age}}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            list: [1,2,3,4,5,5],
+            list2: [
+                {name: "张三", age: 18},
+                {name: "李四", age: 15},
+                {name: "王二", age: 24},
+                {name: "麻子", age: 27}
+            ]
+        },
+        methods: {
+            addNum(){
+                this.list.push(5);
+            }
+        }
+    })
+</script>
+</html>
