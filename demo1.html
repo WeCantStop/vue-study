@@ -22,15 +22,12 @@
             msg: "hello,world",
             msg1: "hello,will",
             msg2: "<i>hello</i>",
-            flag: true
         },
         // 定义方法
         methods: {
             changeMsg(){
                 //this 指的是vm这个对象
                 this.msg = "我爱你们啊!";
-                this.flag = !this.flag;
-                console.log(this.flag);
             }
         }
     })

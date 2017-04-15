@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add</title>
+    <script src="vue1028.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="num1">
+        <span>+</span>
+        <input type="text" v-model="num2">
+        <button @click="add">=</button>
+        <span>{{result}}</span>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            num1: "",
+            num2: "",
+            result: ""
+        },
+        methods: {
+            add(){
+                this.result = Number(this.num1) + Number(this.num2);
+            }
+        }
+    })
+</script>
+</html>
