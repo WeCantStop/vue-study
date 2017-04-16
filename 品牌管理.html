@@ -45,7 +45,7 @@
             <tr v-for="(key, item) in list | filterBy searchItem in 'name'" track-by="$index">
                 <td>{{key+1}}</td>
                 <td>{{item.name}}</td>
-                <td>{{item.creatTime}}</td>
+                <td>{{item.creatTime | timeFormat}}</td>
                 <td style="width: 50px">
                     <a href="#" @click.prevent="del(key)">删除</a>
                 </td>
@@ -93,6 +93,24 @@
             // 删除数据
             del(key){
                 this.list.splice(key, 1);
+            }
+        },
+        filters:{
+            // 过滤时间
+            timeFormat(input){
+                var time = new Date(input),
+                        y = time.getFullYear(),
+                        M = time.getMonth() + 1,
+                        d = time.getDate(),
+                        h = time.getHours(),
+                        m = time.getMinutes(),
+                        s = time.getSeconds();
+                M = M < 10? "0" + M : M;
+                d = d < 10? "0" + d : d;
+                h = h < 10? "0" + h : h;
+                m = m < 10? "0" + m : m;
+                s = s < 10? "0" + s : s;
+                return y + "-" + M + "-" + d;
             }
         }
     })
