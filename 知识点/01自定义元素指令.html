@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义元素指令</title>
+    <script src="../vue1028.js"></script>
+</head>
+<body>
+    <div id="app">
+        <span v-date-format></span>
+        <br />
+        <time-format></time-format>
+    </div>
+</body>
+<script>
+    //定义属性指令
+    //传参形式
+    Vue.directive("dateFormat",{
+        bind(){
+            //使用this.vm.time 拿到model里面的值
+            var time = this.vm.time;
+            time = new Date(time);
+            var y = time.getFullYear();
+            var m = time.getMonth() + 1;
+            var d = time.getDate();
+            m = m < 9 ? '0' + m : m;
+            d = d < 9 ? '0' + d : d;
+            this.el.innerText = y + "-" + m + "-" + d;
+        }
+    })
+
+    //定义元素指令
+    Vue.elementDirective("time-format", {
+        bind(){
+            //使用this.vm.time 拿到model里面的值
+            var time = this.vm.time;
+            time = new Date(time);
+            var y = time.getFullYear();
+            var m = time.getMonth() + 1;
+            var d = time.getDate();
+            m = m < 9 ? '0' + m : m;
+            d = d < 9 ? '0' + d : d;
+            this.el.innerText = y + "-" + m + "-" + d;
+        }
+    })
+
+
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            time: new Date()
+        },
+        methods: {
+
+        }
+    })
+
+
+
+</script>
+</html>
