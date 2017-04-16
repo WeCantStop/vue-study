@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>品牌管理</title>
+    <script src="vue1028.js"></script>
+    <style>
+        .list {
+            border-collapse: collapse;
+            width: 600px;
+            margin: 0 auto;
+        }
+        .list th {
+            padding: 5px;
+            background: skyblue;
+            text-align: center;
+            font-size: 14px;
+            border: 1px solid #000;
+        }
+
+        .list td {
+            padding: 5px;
+            border: 1px solid #000;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--品牌列表区域-->
+    <table class="list" style="text-align: center">
+        <tr>
+            <td colspan="3">
+                搜索:<input type="text" v-model="searchItem">
+            </td>
+        </tr>
+        <tr>
+            <th>编号</th>
+            <th>品牌名称</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+        <!-- vue 2.0 中，系统的过滤器已经移除了 (多余) -->
+        <!-- 但是还是保留了自定义过滤器 -->
+        <tr v-for="(key, item) in list | filterBy searchItem in 'name'" track-by="$index">
+            <td>{{key+1}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.creatTime}}</td>
+            <td style="width: 50px">
+                <a href="#" @click.prevent="del(key)">删除</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="text" v-model="addVal" v-focus colorname1="red" colorname2="yellowgreen" @keyup.13="add()">
+            </td>
+            <td></td>
+            <td>
+                <button @click="add">添加</button>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+<script>
+    Vue.directive("on").keyCodes.f2 = 113;
+
+
+    //自定义指令不能和系统的指令冲突
+    Vue.directive("focus",{
+        //params 传参值
+        params: ["colorname1", "colorname2"],
+       bind(){
+           var cname = this.params.colorname2;
+           console.log(this.params);
+            //这个指令的逻辑
+           //可以利用this.el来气获取到当前指令所在的元素对象
+           this.el.style.backgroundColor = cname;
+           //自动获取焦点
+           this.el.focus();
+        }
+    });
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            list: [
+                {name: "宝马",creatTime: new Date()},
+                {name: "奥迪",creatTime: new Date()},
+                {name: "奔驰",creatTime: new Date()},
+                {name: "大众",creatTime: new Date()}
+            ],
+            addVal: "",
+            searchItem: ""
+        },
+        methods: {
+
+            //增加数据
+            add(){
+                if ( this.addVal ){
+                    this.list.push({id:this.list.length+1,name: this.addVal, creatTime: new Date()})
+                    this.addVal = "";
+                }else {
+                    alert("请输入品牌")
+                }
+
+            },
+
+            // 删除数据
+            del(key){
+                this.list.splice(key, 1);
+            }
+        }
+    })
+</script>
+</html>
