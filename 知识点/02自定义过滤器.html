@@ -10,14 +10,23 @@
         <div>{{words | uppercase}}</div>
         <div>{{words | lowercase}}</div>
         <div>{{ time | timeFormat}}</div>
+        <div>{{test | reverseWords}}</div>
     </div>
 </body>
 <script>
+    // 定义一个全局过滤器
+    Vue.filter("reverseWords", function(input){
+        input = input.split("");
+        input = input.reverse();
+        return input.join("");
+    })
+
     // vm 中的 filter 定义过滤器 私有过滤器
     var vm = new Vue({
         el: "#app",
         data: {
             words: "AAAaaa",
+            test: "abcdefg",
             time: new Date()
         },
         filters:{
