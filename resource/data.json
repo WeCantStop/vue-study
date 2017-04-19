@@ -1,0 +1,10 @@
+{
+  "status": 0,
+  "data": [
+    { "type":"奥迪", "price": "20w"},
+    { "type":"奔驰", "price": "70w"},
+    { "type":"大众", "price": "15w"},
+    { "type":"特斯拉", "price": "80w"}
+  ],
+  "code": 200
+}

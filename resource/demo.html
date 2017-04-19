@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>resource</title>
+    <script src="../vue1028.js"></script>
+    <script src="../vue-resource.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in list">{{item.type}}=>{{item.price}}</li>
+        </ul>
+        <button @click="getData">获取数据</button>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            list: []
+        },
+        methods: {
+            getData(){
+                this.$http.get("./data.json").then(function(res){
+                    console.log(res);
+                    console.log(res.body);
+                    this.list = res.body.data;
+                },function(){
+                    alert("error")
+                })
+            }
+        }
+    })
+</script>
+</html>
