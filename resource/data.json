@@ -4,7 +4,10 @@
     { "type":"奥迪", "price": "20w"},
     { "type":"奔驰", "price": "70w"},
     { "type":"大众", "price": "15w"},
-    { "type":"特斯拉", "price": "80w"}
+    { "type":"特斯拉", "price": "80w"},
+    { "type":"凯迪拉克", "price": "100w"},
+    { "type":"法拉利", "price": "200w"},
+    { "type":"保时捷", "price": "220w"}
   ],
   "code": 200
 }

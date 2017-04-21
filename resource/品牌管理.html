@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>品牌管理</title>
+    <script src="../vue1028.js"></script>
+    <script src="../vue-resource.js"></script>
+    <style>
+        .list {
+            border-collapse: collapse;
+            width: 600px;
+            margin: 0 auto;
+        }
+        .list th {
+            padding: 5px;
+            background: skyblue;
+            text-align: center;
+            font-size: 14px;
+            border: 1px solid #000;
+        }
+
+        .list td {
+            padding: 5px;
+            border: 1px solid #000;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!--品牌列表区域-->
+        <table class="list" style="text-align: center">
+            <tr>
+                <td colspan="3">
+                    搜索:<input type="text" v-model="searchItem">
+                </td>
+            </tr>
+            <tr>
+                <th>编号</th>
+                <th>品牌名称</th>
+                <th>价钱</th>
+                <th>操作</th>
+            </tr>
+            <!-- vue 2.0 中，系统的过滤器已经移除了 (多余) -->
+            <!-- 但是还是保留了自定义过滤器 -->
+            <tr v-for="(key, item) in list | filterBy searchItem in 'type'" track-by="$index">
+                <td>{{key+1}}</td>
+                <td>{{item.type}}</td>
+                <td>{{item.price}}</td>
+                <td style="width: 50px">
+                    <a href="#" @click.prevent="del(key)">删除</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="text" v-model="addVal" @keyup.enter="add()">
+                </td>
+                <td></td>
+                <td>
+                    <button @click="add">添加</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script>
+
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            list: [],
+            addVal: "",
+            searchItem: ""
+        },
+
+        // 声明周期钩子函数
+        created: function(){
+            this.getList();
+        },
+
+        methods: {
+            //增加数据
+            add(){
+                if ( this.addVal ){
+                    this.list.push({id:this.list.length+1, type: this.addVal, price: new Date()})
+                    this.addVal = "";
+                }else {
+                    alert("请输入品牌")
+                }
+
+            },
+
+            // 删除数据
+            del(key){
+                this.list.splice(key, 1);
+            },
+
+            // 获得数据
+            getList(){
+                this.$http.get("./data.json").then(function(res){
+                    console.log(res.body);
+                    this.list = res.body.data;
+                })
+            },
+
+            getListByPost(){
+                this.$http.post("url",{data: "vaule"},{emulateJSON: true}).then(function(res){
+                    this.list = res.body.data;
+                })
+            }
+        },
+        filters:{
+            // 过滤时间
+            timeFormat(input){
+                var time = new Date(input),
+                        y = time.getFullYear(),
+                        M = time.getMonth() + 1,
+                        d = time.getDate(),
+                        h = time.getHours(),
+                        m = time.getMinutes(),
+                        s = time.getSeconds();
+                M = M < 10? "0" + M : M;
+                d = d < 10? "0" + d : d;
+                h = h < 10? "0" + h : h;
+                m = m < 10? "0" + m : m;
+                s = s < 10? "0" + s : s;
+                return y + "-" + M + "-" + d;
+            }
+        }
+    })
+</script>
+</html>
