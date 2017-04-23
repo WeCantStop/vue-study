@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>animation demo1</title>
+    <script src="../vue1028.js"></script>
+    <style>
+        .show-transition{
+            transition: all 1s ease;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <button @click="isShow">显示/隐藏</button>
+    <div v-show="showFlag" transition="show">hello,vue-animation</div>
+</div>
+</body>
+<script>
+    Vue.transition("show",{
+        // el代表执行动画的元素
+        // 进入之前
+        beforeEnter: function(el){
+            el.style.paddingLeft = "100px";
+            console.log(1111)
+        },
+        // 最终的位置
+        enter: function(el){
+            el.style.paddingLeft = "0";
+            console.log(2222)
+        },
+        // 动画完成之后的一些逻辑处理
+        afterEnter:function(el){
+            console.log(el)
+        }
+    })
+
+    var vm = new Vue({
+        el: "#app",
+        data:{
+            showFlag: false
+        },
+        methods:{
+            isShow(){
+                this.showFlag = !this.showFlag;
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>animation demo1</title>
+    <script src="../vue2.js"></script>
+    <style>
+        .show-transition{
+            transition: all 0.2s;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <button @click="isShow">显示/隐藏</button>
+    <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter">
+        <div v-show="showFlag" class="show-transition">hello,vue-animation</div>
+    </transition>
+</div>
+</body>
+<script>
+
+    var vm = new Vue({
+        el: "#app",
+        data:{
+            showFlag: false
+        },
+        methods:{
+            isShow(){
+                this.showFlag = !this.showFlag;
+            },
+
+            beforeEnter(el){
+                el.style.paddingLeft = "100px";
+            },
+
+            enter(el){
+                var oh = el.offsetHeight;
+                this.$nextTick(function(){
+                    el.style.paddingLeft = "0"
+                })
+            },
+
+            afterEnter(el){
+                this.showFlag = !this.showFlag;
+            }
+
+        },
+
+    })
+</script>
+</html>
