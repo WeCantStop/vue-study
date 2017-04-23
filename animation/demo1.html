@@ -4,40 +4,29 @@
     <meta charset="UTF-8">
     <title>animation demo1</title>
     <script src="../vue1028.js"></script>
-    <style>
-        /*存在的过程*/
-        .myDemo-transition {
-            opacity: 1;
-            transition: all 0.5s;
-            height: 18px;
-        }
-        /*从无到有的过程*/
-        .myDemo-enter {
-            opacity: 0;
-            height: 0;
-        }
-        /*从有到无的过程*/
-        .myDemo-leave {
-            height: 0;
-            opacity: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="../animate.css">
 </head>
 <body>
     <div id="app">
-        <div v-if="showFlag" transition="myDemo">hello,vue-animation</div>
         <button @click="isShow">显示/隐藏</button>
+        <div v-show="showFlag" class="animated" transition="show">hello,vue-animation</div>
     </div>
 </body>
 <script>
     var vm = new Vue({
         el: "#app",
         data:{
-            showFlag: true
+            showFlag: false
         },
         methods:{
             isShow(){
                 this.showFlag = !this.showFlag;
+            }
+        },
+        transitions:{
+            show:{
+                enterClass: "fadeInRight",
+                leaveClass: "fadeOutRight"
             }
         }
     })
