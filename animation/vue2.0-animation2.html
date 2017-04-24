@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>vue2.0-animation-css</title>
     <script src="../vue2.js"></script>
+    <link rel="stylesheet" href="../animate.css">
     <style>
         /*动画中间的位置*/
         .fade-enter-active,
@@ -23,8 +24,10 @@
 <body>
     <div id="app">
         <button @click="toggle">显示/隐藏</button>
-        <transition name="fade">
-            <div v-show="isShow">hello,vueJS</div>
+        <transition enter-active-class="fadeInRight"
+                    leave-active-class="fadeOutRight"
+                    >
+            <div class="animated" v-show="isShow">hello,vueJS</div>
         </transition>
     </div>
     <script>
