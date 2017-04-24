@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2.0-animation-css</title>
+    <script src="../vue2.js"></script>
+    <style>
+        /*动画中间的位置*/
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: all 0.5s;
+            opacity: 1;
+        }
+
+        /*动画开始和结束时候的位置*/
+        .fade-enter,
+        .fade-leave-active {
+            opacity: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="toggle">显示/隐藏</button>
+        <transition name="fade">
+            <div v-show="isShow">hello,vueJS</div>
+        </transition>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                isShow: false
+            },
+            methods: {
+                toggle(){
+                    this.isShow = !this.isShow;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
