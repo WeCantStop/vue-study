@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component</title>
+    <script src="../vue1028.js"></script>
+</head>
+<body>
+    <template id="account">
+        <h2>Hello,vue</h2>
+        <a href="#" @click="login">{{loginMsg}}</a>
+        <a href="#">{{registerMsg}}</a>
+    </template>
+
+    <div id="app">
+        <account></account>
+    </div>
+</body>
+<script>
+    // 组件中定义的data是一个函数，要return出来一个对象
+    Vue.component("account", {
+        template: "#account",
+        methods: {
+            login(){
+                console.log(this.consoleMsg)
+            }
+        },
+        data(){
+            return {
+                loginMsg: "登录",
+                registerMsg: "注册",
+                consoleMsg: "Hello,vue"
+            }
+        }
+    })
+
+    new Vue({
+        el: "#app"
+    })
+</script>
+</html>

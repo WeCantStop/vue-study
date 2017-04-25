@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册组件</title>
+    <script src="../vue1028.js"></script>
+</head>
+<body>
+    <template id="account">
+        <h2>账户组件内容</h2>
+        <a href='#'>登录</a>
+        <a href='#'>注册</a>
+    </template>
+
+    <div id="app">
+        <account></account>
+    </div>
+</body>
+<script>
+    /* 写法一 */
+//    //定义一个组件 (定义给Vue函数)
+//    var account = Vue.extend({
+//        template: "<a href='#'>登录</a><a href='#'>注册</a>"
+//    })
+//
+//    //全局注册组件
+//    Vue.component('account', account);
+
+    /* 写法二 - 定义和注册组件一步到位了，比较方便 */
+//    Vue.component("account", {
+//                template: "<a href='#'>登录</a> <a href='#'>注册</a>"
+//    })
+
+    /* 写法三 推荐*/
+    Vue.component("account", {
+        template: "#account"
+    })
+
+
+    new Vue({
+        el: "#app"
+    })
+</script>
+</html>
