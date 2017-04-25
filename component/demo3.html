@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定义子组件</title>
+    <script src="../vue1028.js"></script>
+</head>
+<body>
+<template id="account">
+    <login></login>
+    <register></register>
+</template>
+
+    <div id="app">
+        <account></account>
+    </div>
+</body>
+<script>
+   Vue.component("account", {
+       template: "#account",
+       //定义和注册子组件
+       components: {
+           login: {
+               template: "<h1>我是登录</h1>"
+           },
+           register:{
+               template: "<h1>我是注册</h1>"
+           }
+       }
+   })
+
+    new Vue({
+        el: "#app"
+    })
+</script>
+</html>
