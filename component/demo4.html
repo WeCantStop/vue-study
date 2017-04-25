@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定义子组件</title>
+    <script src="../vue1028.js"></script>
+</head>
+<body>
+<!-- 利用ispa来切换组件 利用component结合is属性动态显示子组件 -->
+<template id="account">
+    <a href="#" @click="this.componentName='login'">登录</a>
+    <a href="#" @click="this.componentName='register'">注册</a>
+
+    <component :is="componentName">
+        <login></login>
+        <register></register>
+    </component>
+</template>
+
+    <div id="app">
+        <account></account>
+    </div>
+</body>
+<script>
+   Vue.component("account", {
+       template: "#account",
+       //定义和注册子组件
+       components: {
+           login: {
+               template: "<h1>我是登录</h1>"
+           },
+           register:{
+               template: "<h1>我是注册</h1>"
+           }
+       },
+       data(){
+           return {
+               componentName: "login"
+           }
+       }
+   })
+
+    new Vue({
+        el: "#app"
+    })
+</script>
+</html>
