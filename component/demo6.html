@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>子组件传递给父组件</title>
+    <script src="../vue1028.js"></script>
+</head>
+<body>
+    <template id=child>
+        <button @click="sendData">发送</button>
+    </template>
+    <div id="app">
+        <Child v-on:word="get"></Child>
+    </div>
+</body>
+<script>
+    // 三步走
+    // 1.子组件定义事件$emit
+    // 2.父组件绑定属性
+    // 3.父组件绑定事件获取子组件传递过来的值
+    new Vue({
+        el: "#app",
+        components:{
+            "Child": {
+                template: "#child",
+                methods: {
+                    sendData:function(){
+                        this.$emit("word","Hello")
+                    }
+                }
+            }
+        },
+        methods:{
+            get(input){
+                alert(input);
+            }
+        }
+    })
+</script>
+</html>
