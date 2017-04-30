@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-ref</title>
+    <script src="../vue1028.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="getData">click</button>
+        <subcom v-ref:subcom></subcom>
+        <p v-el:data-area></p>
+    </div>
+</body>
+<script>
+    // v-ref 是获取整个组件的对象
+    // 定义组件(全局)
+    Vue.component("subcom",{
+        template: "<h2>这是subcom的子组件内容</h2>",
+        data(){
+            return {
+                msg: "这是subcom的子组件内容"
+            }
+        }
+    })
+    new Vue({
+        el: "#app",
+        methods: {
+            getData(){
+                console.log(this.$refs)
+                this.$els.dataArea.innerHTML = this.$refs.subcom.$el.firstChild.data;
+            }
+        }
+    })
+</script>
+</html>

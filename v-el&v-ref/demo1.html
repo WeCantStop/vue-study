@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-el</title>
+    <script src="../vue1028.js"></script>
+    <style>
+        #dataContent{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="getData">click</button>
+        <div v-el:data-content id="dataContent">我是数据</div>
+        <p>{{showData}}</p>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            showData: ""
+        },
+        methods: {
+            getData(){
+//                console.log(this.$els.dataContent);
+                this.showData = this.$els.dataContent.innerHTML;
+            }
+        }
+
+    })
+</script>
+</html>

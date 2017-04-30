@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2.0 ref结合了vue1 中的v-el v-ref</title>
+    <script src="../vue2.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="getdata1">button-1</button>
+        <button @click="getdata2">button-2</button>
+        <div ref="demo1">我是示例一</div>
+        <demo2 ref="demo2"></demo2>
+        <p>{{dataarea1}}</p>
+        <p>{{dataarea2}}</p>
+
+    </div>
+</body>
+<script>
+    Vue.component("demo2", {
+        template: "<h2>我是ref组件版</h2>",
+
+    })
+
+    new Vue({
+        el: "#app",
+        data: {
+            dataarea1: "",
+            dataarea2: ""
+
+        },
+        methods: {
+            getdata1(){
+                this.dataarea1 = this.$refs.demo1.innerHTML;
+//                console.log(this.$refs)
+            },
+            getdata2(){
+                this.dataarea2 = this.$refs.demo2.$el.innerHTML;
+//                console.log(this.$refs.demo2);
+            }
+        }
+    })
+</script>
+</html>
