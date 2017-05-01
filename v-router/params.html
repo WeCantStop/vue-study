@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-router传参</title>
+    <script src="../vue2.js"></script>
+    <script src="../vue-router211.js"></script>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/login">登录</router-link>
+        <router-link to="/register/willgoheart/123456">注册</router-link>
+        <div>
+            <router-view></router-view>
+        </div>
+    </div>
+</body>
+<script>
+    const login = Vue.extend({
+        template: "<h2>登录</h2>"
+    });
+
+    const register = Vue.extend({
+        template: "<h2>注册=> {{username}},{{password}}</h2>",
+        data(){
+            return {
+                username: "",
+                password: "",
+            }
+        },
+        created(){
+            // this.$route.params. 获取url传递过来的参数
+            var username = this.$route.params.username;
+            var pas = this.$route.params.password;
+            console.log(this.$route.params)
+            this.username = username;
+            this.password = pas;
+        }
+
+    });
+
+    const router = new VueRouter({
+        routes: [
+            {path: "/", redirect: "/login"},
+            {path: "/login", component:login},
+                //关键点 /:传值
+            {path: "/register/:username/:password", component:register},
+        ]
+    });
+
+    new Vue({
+        el: "#app",
+        router: router
+    })
+
+</script>
+</html>
