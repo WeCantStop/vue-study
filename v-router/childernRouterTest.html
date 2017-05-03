@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>嵌套路由练习</title>
+    <script src="../vue2.js"></script>
+    <script src="../vue-router211.js"></script>
+</head>
+<body>
+    <template id="login">
+        <h3>登录</h3>
+    </template>
+
+    <template id="register">
+        <h3>注册</h3>
+    </template>
+
+    <template id="account">
+        <div>
+            <h2>账户</h2>
+            <router-view></router-view>
+        </div>
+    </template>
+
+    <div id="app">
+        <router-link to="/account/login">登录</router-link>
+        <router-link to="/account/register">注册</router-link>
+        <router-view></router-view>
+    </div>
+</body>
+<script>
+    const login = {
+        template: "#login"
+    }
+
+    const register = {
+        template: "#register"
+    }
+
+    const account = {
+        template: "#account"
+    }
+
+    const routes = [
+        { path: "/account", component: account, children:[
+            {path: "login", component: login},
+            {path: "register", component: register}
+        ]}
+    ]
+
+    const router = new VueRouter({
+        routes: routes
+    })
+
+    new Vue({
+        el: "#app",
+        router: router
+    })
+
+</script>
+</html>

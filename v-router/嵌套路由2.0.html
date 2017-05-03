@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>嵌套路由2.0</title>
+    <script src="../vue2.js"></script>
+    <script src="../vue-router211.js"></script>
+</head>
+<body>
+    <template id="account">
+        <div>
+            <h1>账户</h1>
+            <router-view></router-view>
+        </div>
+    </template>
+
+    <div id="app">
+        <router-link to="/account/login">登录</router-link>
+        <router-link to="/account/register">注册</router-link>
+        <router-view></router-view>
+    </div>
+</body>
+
+<script>
+    //子路由组件
+    const login = Vue.extend({
+        template: "<h2>登录</h2>"
+    })
+    //子路由组件
+    const register = Vue.extend({
+        template: "<h2>注册</h2>"
+    })
+
+    //父路由组件
+    const account = Vue.extend({
+        template: "#account"
+    })
+
+    //定义路由规则
+    const routes = [
+        {   path: "/account",
+            component: account,
+            children:[
+                {path: "login", component: login},
+                {path: "register", component: register}
+            ]
+        }
+    ]
+
+    const router = new VueRouter({
+        routes: routes
+    })
+
+    new Vue({
+        el: "#app",
+        router: router
+    })
+
+
+</script>
+</html>
