@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>computed-demo</title>
+    <script src="../vue2.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="firstname">
+        <input type="text" v-model="lastname">
+        <p>{{ fullname }}</p>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            firstname: "will",
+            lastname: "pan",
+        },
+        computed: {
+            //是一个data值，在上面已经使用了，依赖于firstname和lastname,当两者有其一改变时，就会重新调用该方法
+            //computed的好处(相对于watch性能更高)依赖的值没有改变时候，计算属性的值是从缓重中来的
+            fullname(){
+                return this.firstname + " " + this.lastname;
+            }
+        }
+    })
+</script>
+</html>
