@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2.0_router版</title>
+    <script src="../vue2.js"></script>
+    <script src="../vue-router211.js"></script>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/login">登录</router-link>
+        <router-link to="/register">注册</router-link>
+        <router-view></router-view>
+    </div>
+</body>
+<script>
+    //定义组件
+    const login = Vue.extend({
+        template: "<h2>登录</h2>"
+    })
+
+    const register = Vue.extend({
+        template: "<h2>注册</h2>"
+    })
+
+    //定义路由机制
+    const router = new VueRouter({
+        routes: [
+            {path: "/", redirect: "/login"},
+            {path: "/login", component: login},
+            {path: "/register", component: register}
+        ]
+    });
+
+    //挂载路由
+    new Vue({
+        el: "#app",
+        router: router,
+        //监控路由对象 $route 配合路由来写
+        watch: {
+            "$route": function(newVal,oldVal){
+                //newVal oldVal
+                console.log(newVal);
+            }
+        }
+    })
+
+</script>
+</html>

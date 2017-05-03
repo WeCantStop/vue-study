@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>watch</title>
+    <script src="../vue2.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="firstname">
+        <input type="text" v-model="lastname">
+        <p>firstname:{{firstname}}</p>
+        <p>lastname:{{lastname}}</p>
+        <p>fullname:{{fullname}}</p>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            firstname: "",
+            lastname: "",
+            fullname: ""
+        },
+        watch: {
+            firstname:function(newVal,oldVal){
+                this.fullname = newVal + " " + this.lastname;
+            },
+            lastname:function(newVal,oldVal){
+                this.fullname = this.firstname + " " + newVal;
+            }
+        }
+    })
+</script>
+</html>
