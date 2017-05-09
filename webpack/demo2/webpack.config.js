@@ -11,6 +11,14 @@ module.exports = {
     },
     module: {
         loaders: [
+            //js语法 es6 转 es5
+            {
+                test: /\.js$/,
+                //不建议写在这里，在打包vue时候，要用插件形式写在下面
+                //loader:"babel-loader?presets[]=es2015",创建.babelrc文件代替
+                loader:"babel-loader",
+                exclude: /node_modules/
+            },
             {
                 //打包css
                 test: /\.css$/,
